@@ -81,7 +81,6 @@ class StudentContract(models.Model):
         """
         Method to assign sequence to student contract
         """
-        print("\n\nHERE\n\n")
         Sequence = self.env["ir.sequence"]
         for rec in self:
             if rec.status == "confirmed" and rec.name == "New":
@@ -111,6 +110,11 @@ class StudentContract(models.Model):
                 if rec.move_id.payment_state not in ["paid", "in_payment"]
                 else rec.move_id.payment_state
             )
+
+            # Update status for subjects assigned to the student
+            if payment_status != "not_paid":
+                rec.contract_line_ids.update({"status": "coursing"})
+
             rec.payment_status = payment_status
 
     @api.constrains("date_due", "date")
@@ -182,6 +186,10 @@ class StudentContract(models.Model):
         move_id = self.env["account.move"].create(invoice_vals)
         self.status = "confirmed"
         self.move_id = move_id
+
+        # Asociate a contract to the student's subject
+        subject_line_ids = self.contract_line_ids.mapped("student_subject_line_id")
+        subject_line_ids.write({"contract_id", "=", self.id})
         return move_id
 
     def action_cancel_contract(self):

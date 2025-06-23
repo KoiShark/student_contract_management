@@ -51,7 +51,7 @@
 
                     <notebook colspan="4">
                         <page string="Contract Lines" name="contract_lines" autofocus="autofocus">
-                            <field name="contract_line_ids"/>
+                            <field name="contract_line_ids" required="1" readonly="status != 'draft'"/>
                             <group col="12" class="oe_invoice_lines_tab overflow-hidden">
                                 <group colspan="8"/>
                                 <group colspan="4">

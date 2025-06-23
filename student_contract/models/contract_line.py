@@ -9,7 +9,9 @@ class ContractLine(models.Model):
     student_subject_line_id = fields.Many2one(
         "student.subject.line",
         string="Subject",
-        # domain="[('student_id', '=', contract_id.student_id.id)]",
+    )
+    subject_status = fields.Selection(
+        related="student_subject_line_id.status", readonly=False
     )
     domain_teacher_ids = fields.Many2many(
         "hr.employee",
