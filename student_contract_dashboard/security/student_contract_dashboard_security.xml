@@ -5,6 +5,7 @@
             <field name="name">Dashboard</field>
             <field name="implied_ids" eval="[(4, ref('student_contract.group_student_contract_user'))]"/>
             <field name="category_id" ref="student_contract.module_category_student_contract"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
     </data>
 </odoo>
