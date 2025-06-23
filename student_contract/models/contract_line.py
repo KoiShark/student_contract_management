@@ -30,8 +30,8 @@ class ContractLine(models.Model):
         compute="_compute_amount",
         precompute=True,
         readonly=False,
-        currency_field="company_currency_id",
         store=True,
+        currency_field="company_currency_id",
     )
     contract_id = fields.Many2one(
         "student.contract",

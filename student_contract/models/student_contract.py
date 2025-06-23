@@ -110,9 +110,27 @@ class StudentContract(models.Model):
 
             # Update status for subjects assigned to the student
             if payment_status != "not_paid":
-                rec.contract_line_ids.update({"status": "coursing"})
+                rec.contract_line_ids.update({"subject_status": "coursing"})
 
             rec.payment_status = payment_status
+
+    @api.onchange("student_id")
+    def _onchange_student_id(self):
+        for rec in self:
+            if not rec.student_id:
+                continue
+            subject_line_ids = rec.student_id.subject_line_ids.filtered_domain(
+                [("status", "=", "on_hold"), ("contract_id", "=", False)]
+            )
+
+            values = [
+                (0, 0, {"student_subject_line_id": subject.id})
+                for subject in subject_line_ids
+            ]
+            if values:
+                rec.contract_line_ids = values
+            else:
+                raise ValidationError(_("The selected student doesn't have subjects available"))
 
     @api.constrains("date_due", "date")
     def _check_dates(self):
@@ -175,18 +193,14 @@ class StudentContract(models.Model):
         invoice_vals = self._prepare_invoice()
         invoice_line_vals = self._prepare_invoice_line_ids(self.contract_line_ids)
 
-        invoice_vals.update(
-            {
-                "invoice_line_ids": invoice_line_vals,
-            }
-        )
+        invoice_vals.update({"invoice_line_ids": invoice_line_vals})
         move_id = self.env["account.move"].create(invoice_vals)
         self.status = "confirmed"
         self.move_id = move_id
 
         # Asociate a contract to the student's subject
         subject_line_ids = self.contract_line_ids.mapped("student_subject_line_id")
-        subject_line_ids.write({"contract_id", "=", self.id})
+        subject_line_ids.write({"contract_id": self.id})
         return move_id
 
     def action_cancel_contract(self):

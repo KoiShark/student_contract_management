@@ -43,7 +43,7 @@
 
                     <group>
                         <group>
-                            <field name="student_id" domain="[('is_institute_contact', '=', True), ('contact_type', '=', 'student')]" options="{'no_create': True,}"/>
+                            <field name="student_id" required="1" domain="[('is_institute_contact', '=', True), ('contact_type', '=', 'student')]" options="{'no_create': True,}"/>
                             <field name="date" string="Planned Date" widget="daterange" options='{"end_date_field": "date_due", "always_range": "1"}' required="date or date_due" />
                             <field name="date_due" invisible="1" required="date"/>
                         </group>
