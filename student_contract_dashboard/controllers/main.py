@@ -7,7 +7,6 @@ class DashboardController(http.Controller):
 
     @http.route("/student_contract_dashboard", type="http", auth="user")
     def show_dashboard(self, **kwargs):
-        # Verificar si el usuario tiene acceso
         dashboard_url = request.env.company.power_bi_url
 
         if not dashboard_url:

@@ -3,5 +3,5 @@
     <menuitem id="menu_student_contract_dashboard"
         name="Dashboards"
         parent="student_contract.menu_student_contract_root"
-        sequence="1"/>
+        sequence="3"/>
 </odoo>
