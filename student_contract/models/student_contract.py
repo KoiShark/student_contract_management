@@ -39,10 +39,7 @@ class StudentContract(models.Model):
         readonly=True,
         copy=False,
     )
-    date = fields.Date(
-        string="Date",
-        default=fields.Date.today,
-    )
+    date = fields.Date(string="Date")
     date_due = fields.Date(string="Due Date")
     contract_line_ids = fields.One2many(
         "contract.line",

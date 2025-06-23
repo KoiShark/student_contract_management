@@ -32,7 +32,7 @@
                     </div>
                     <widget name="web_ribbon" title="Paid" invisible="payment_status != 'paid'"/>
                     <widget name="web_ribbon" title="In Payment" invisible="payment_status != 'in_payment'"/>
-                    <widget name="web_ribbon" title="Not Paid" bg_color="text-bg-danger" invisible="payment_status != 'not_paid'"/>
+                    <widget name="web_ribbon" title="Not Paid" bg_color="text-bg-danger" invisible="status != 'confirmed' or payment_status != 'not_paid'"/>
                     <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
                     <field name="move_id" invisible="1"/>
                     <div class="oe_title mb24">
