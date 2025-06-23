@@ -21,6 +21,7 @@
         "security/ir.model.access.csv",
         "data/ir_sequence_data.xml",
         "views/student_contract_menu_views.xml",
+        "views/res_config_settings.xml",
         "views/course_table_views.xml",
         "views/term_subject_views.xml",
         "views/course_line_views.xml",

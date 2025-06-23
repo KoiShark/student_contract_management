@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.student.contract</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="student_contract" string="Student Contract" name="student_contract" groups="student_contract.group_student_contract_manager">
+                    <block title="Student Contract" name="student_contract_setting_container"/>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_student_contract_config" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'student_contract', 'bin_size': False}</field>
+    </record>
+
+    <menuitem id="menu_student_contract_config"
+        name="Settings"
+        action="action_student_contract_config"
+        parent="student_contract.menu_student_contract_settings"
+        groups="student_contract.group_student_contract_manager"
+        sequence="0"/>
+</odoo>

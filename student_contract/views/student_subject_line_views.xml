@@ -9,7 +9,7 @@
                 <field name="course_id" required="1" options="{'no_create': True,}"/>
                 <field name="subject_id" required="1" domain="[('id', 'in', domain_subject_ids)]" options="{'no_create': True,}"/>
                 <field name="student_id" column_invisible="1"/>
-                <field name="status" widget="badge"/>
+                <field name="status"/>
             </list>
         </field>
     </record>
