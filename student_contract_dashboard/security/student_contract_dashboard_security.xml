@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_student_contract_dashboard" model="res.groups">
+            <field name="name">Dashboard</field>
+            <field name="implied_ids" eval="[(4, ref('student_contract.group_student_contract_user'))]"/>
+            <field name="category_id" ref="student_contract.module_category_student_contract"/>
+        </record>
+    </data>
+</odoo>
