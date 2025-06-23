@@ -67,6 +67,21 @@
         </field>
     </record>
 
+    <record id="view_student_contract_search" model="ir.ui.view">
+        <field name="name">view.student.contract.search</field>
+        <field name="model">student.contract</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="student_id"/>
+                <group expand="1" string="Group By">
+                    <filter string="Status" name='status' context="{'group_by':'status'}"/>
+                    <filter string="Active" name='active' context="{'group_by':'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="student_contract_action" model="ir.actions.act_window">
         <field name="name">Contracts</field>
         <field name="res_model">student.contract</field>
