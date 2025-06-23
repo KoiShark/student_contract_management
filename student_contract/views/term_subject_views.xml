@@ -4,7 +4,7 @@
         <field name="name">view.term.subject.list</field>
         <field name="model">term.subject</field>
         <field name="arch" type="xml">
-            <list editable="top">
+            <list editable="top" sample="1">
                 <field name="name"/>
                 <field name="product_id" required="1" context="{'default_is_subject': True, 'default_type': 'service'}"/>
                 <field name="subject_amount" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>

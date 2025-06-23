@@ -4,7 +4,7 @@
         <field name="name">view.course.table.list</field>
         <field name="model">course.table</field>
         <field name="arch" type="xml">
-            <list editable="top">
+            <list editable="top" sample="1">
                 <field name="name" required="1"/>
                 <field name="subject_ids" required="1" widget="many2many_tags" options="{'no_create': True,}"/>
                 <field name="active" widget="boolean_toggle"/>
