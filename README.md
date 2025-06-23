@@ -84,4 +84,4 @@ Módulo completo para la gestión de contratos estudiantiles dentro de Odoo ERP,
   - `account`
   - `product`
 
-*© 2024 - Todos los derechos reservados*
+*© 2025 - Todos los derechos reservados*
