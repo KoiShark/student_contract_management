@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_student_subject_line_list" model="ir.ui.view">
+        <field name="name">view.student.subject.line.list</field>
+        <field name="model">student.subject.line</field>
+        <field name="arch" type="xml">
+            <list editable="top">
+                <field name="name" column_invisible="1"/>
+                <field name="course_id" required="1" options="{'no_create': True,}"/>
+                <field name="subject_id" required="1" domain="[('id', 'in', domain_subject_ids)]" options="{'no_create': True,}"/>
+                <field name="student_id" column_invisible="1"/>
+                <field name="status" widget="badge"/>
+            </list>
+        </field>
+    </record>
+</odoo>

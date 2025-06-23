@@ -5,16 +5,31 @@
     "category": "Human Resources/Contracts",
     "author": "Joel Rivas <joelrivas39@gmail.com>",
     "contributors": [
-        "Joel Rivas <joelrivas39@gmail.com>"
+        "Joel Rivas <joelrivas39@gmail.com>",
     ],
     "maintainer": [
-        "Joel Rivas <joelrivas39@gmail.com>"
+        "Joel Rivas <joelrivas39@gmail.com>",
     ],
     "website": "",
-    "depends": ["contact"],
+    "depends": [
+        "hr",
+        "account",
+        "product",
+    ],
     "data": [
-        "views/res_config_settings_views.xml",
-        "views/account_move_views.xml",
+        "security/student_contract_security.xml",
+        "security/ir.model.access.csv",
+        "data/ir_sequence_data.xml",
+        "views/student_contract_menu_views.xml",
+        "views/course_table_views.xml",
+        "views/term_subject_views.xml",
+        "views/course_line_views.xml",
+        "views/contract_line_views.xml",
+        "views/student_subject_line_views.xml",
+        "views/res_partner_views.xml",
+        "views/hr_employee_views.xml",
+        "views/product_template_views.xml",
+        "views/student_contract_views.xml",
     ],
     # "assets": {
     #     "web.assets_frontend": [
@@ -23,5 +38,6 @@
     # },
     "license": "LGPL-3",
     "installable": True,
-    "auto_install": False
+    "auto_install": False,
+    "application": True,
 }

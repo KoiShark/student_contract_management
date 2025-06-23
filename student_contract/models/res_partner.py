@@ -1,4 +1,4 @@
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 CONTACT_SELECTION = [("student", "Student"), ("teacher", "Teacher")]
@@ -15,5 +15,10 @@ class ResPartner(models.Model):
     contact_type = fields.Selection(
         CONTACT_SELECTION,
         string="Contact Type",
-        default="student",
+    )
+
+    subject_line_ids = fields.One2many(
+        "student.subject.line",
+        "student_id",
+        string="Subject line",
     )

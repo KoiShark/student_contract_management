@@ -5,7 +5,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     is_subject = fields.Boolean(
-        string="subject",
+        string="Subject",
         default=False,
     )
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_term_subject_list" model="ir.ui.view">
+        <field name="name">view.term.subject.list</field>
+        <field name="model">term.subject</field>
+        <field name="arch" type="xml">
+            <list editable="top">
+                <field name="name"/>
+                <field name="product_id" required="1" context="{'default_is_subject': True, 'default_type': 'service'}"/>
+                <field name="subject_amount" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="term_subject_action" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">term.subject</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'active_test': False,}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No subjects available. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_student_contract_subjects"
+        name="Subjects"
+        parent="student_contract.menu_student_contract_settings"
+        action="term_subject_action"
+        groups="student_contract.group_student_contract_user"
+        sequence="3"/>
+</odoo>

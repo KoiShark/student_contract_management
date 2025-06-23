@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Student Contract"
+        id="menu_student_contract_root"
+        groups="student_contract.group_student_contract_user"
+        web_icon="student_contract,static/description/icon.png"/>
+
+    <menuitem id="menu_student_contract_contacts"
+        name="Contacts"
+        parent="menu_student_contract_root"
+        sequence="2"/>
+
+    <menuitem id="menu_student_contract_management"
+        name="Contracts"
+        parent="menu_student_contract_root"
+        sequence="3"/>
+
+    <menuitem id="menu_student_contract_settings"
+        name="Settings"
+        parent="menu_student_contract_root"
+        sequence="4"/>
+</odoo>
