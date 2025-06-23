@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_contract_line_list" model="ir.ui.view">
+        <field name="name">view.contract.line.list</field>
+        <field name="model">contract.line</field>
+        <field name="arch" type="xml">
+            <list editable="top">
+                <field name="name" column_invisible="1"/>
+                <field name="student_subject_line_id" domain="[('student_id', '=', student_id), ('status', '=', 'on_hold'), ('contract_id', '=', False)]" options="{'no_create': True,}"/>
+                <field name="teacher_id" domain="[('id', 'in', domain_teacher_ids)]" options="{'no_create': True,}"/>
+                <field name="subject_status" widget="badge"/>
+                <field name="amount" widget="monetary"/>
+                <field name="contract_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+</odoo>

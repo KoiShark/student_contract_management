@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_student_contract_dashboard"
+        name="Dashboards"
+        parent="student_contract.menu_student_contract_root"
+        sequence="3"/>
+</odoo>

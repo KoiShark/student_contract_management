@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="student_contract_student_action" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'default_is_institute_contact': True, 'default_contact_type': 'student'}</field>
+        <field name="domain">[('is_institute_contact', '=', True), ('contact_type', '=', 'student')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No students available. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_student_contract_contacts_students"
+        name="Students"
+        parent="student_contract.menu_student_contract_contacts"
+        action="student_contract_student_action"
+        sequence="1"/>
+
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="is_institute_contact" groups="student_contract.group_student_contract_user"/>
+            </field>
+            <page name="internal_notes" position="before">
+                <page name="student_subject_line" string="Subject Lines" invisible="not is_institute_contact">
+                    <group>
+                        <group>
+                            <field name="contact_type" widget="radio" required="is_institute_contact"/>
+                        </group>
+                    </group>
+                    <field name="subject_line_ids" invisible="contact_type != 'student'"/>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

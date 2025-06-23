@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.view.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="inside">
+                <span class="d-inline-flex" groups="student_contract.group_student_contract_manager">
+                    <field name="is_subject"/>
+                    <label for="is_subject"/>
+                </span>
+            </div>
+        </field>
+    </record>
+</odoo>

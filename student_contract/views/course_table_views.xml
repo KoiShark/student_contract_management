@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_course_table_list" model="ir.ui.view">
+        <field name="name">view.course.table.list</field>
+        <field name="model">course.table</field>
+        <field name="arch" type="xml">
+            <list editable="top">
+                <field name="name" required="1"/>
+                <field name="subject_ids" required="1" widget="many2many_tags" options="{'no_create': True,}"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="course_table_action" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="res_model">course.table</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'active_test': False,}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No courses available. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_student_contract_courses"
+        name="Courses"
+        parent="student_contract.menu_student_contract_settings"
+        action="course_table_action"
+        groups="student_contract.group_student_contract_manager"
+        sequence="2"/>
+</odoo>

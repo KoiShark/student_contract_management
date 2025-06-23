@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_student_contract_list" model="ir.ui.view">
+        <field name="name">view.student.contract.list</field>
+        <field name="model">student.contract</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="student_id" widget="many2one_avatar_user"/>
+                <field name="total_amount" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                <field name="status" widget="badge"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_student_contract_form" model="ir.ui.view">
+        <field name="name">view.student.contract.form</field>
+        <field name="model">student.contract</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_validate_contract" string="Validate" class="oe_highlight" type="object" groups="student_contract.group_student_contract_user" data-hotkey="q" invisible="status != 'draft'"/>
+                    <button name="action_cancel_contract" string="Cancel" class="oe_highlight" type="object" groups="student_contract.group_student_contract_user" data-hotkey="q" invisible="status != 'draft'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="open_invoices" class="oe_stat_button" icon="fa-bars" type="object" invisible="not move_id">
+                            <span> Invoice</span>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Paid" invisible="payment_status != 'paid'"/>
+                    <widget name="web_ribbon" title="In Payment" invisible="payment_status != 'in_payment'"/>
+                    <widget name="web_ribbon" title="Not Paid" bg_color="text-bg-danger" invisible="status != 'confirmed' or payment_status != 'not_paid'"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="move_id" invisible="1"/>
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field name="name" options="{'line_breaks': False}" widget="text" class="text-break"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="student_id" required="1" domain="[('is_institute_contact', '=', True), ('contact_type', '=', 'student')]" options="{'no_create': True,}"/>
+                            <field name="date" string="Planned Date" widget="daterange" options='{"end_date_field": "date_due", "always_range": "1"}' required="date or date_due" />
+                            <field name="date_due" invisible="1" required="date"/>
+                        </group>
+                    </group>
+
+                    <notebook colspan="4">
+                        <page string="Contract Lines" name="contract_lines" autofocus="autofocus">
+                            <field name="contract_line_ids" required="1" readonly="status != 'draft'"/>
+                            <group col="12" class="oe_invoice_lines_tab overflow-hidden">
+                                <group colspan="8"/>
+                                <group colspan="4">
+                                    <group class="oe_subtotal_footer">
+                                        <field name="total_amount" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'company_currency_id'}" invisible="status == 'draft'"/>
+                                    </group>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="student_contract_action" model="ir.actions.act_window">
+        <field name="name">Contracts</field>
+        <field name="res_model">student.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'active_test': False,}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No contracts available. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_student_contract_management_contracts"
+        name="Contracts"
+        parent="student_contract.menu_student_contract_management"
+        action="student_contract_action"
+        groups="student_contract.group_student_contract_user"
+        sequence="1"/>
+</odoo>

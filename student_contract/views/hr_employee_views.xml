@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="student_contract_teacher_action" model="ir.actions.act_window">
+        <field name="name">Teachers</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'default_is_teacher': True,}</field>
+        <field name="domain">[('is_teacher', '=', True),]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No teachers available. Let's create one!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_student_contract_contacts_teachers"
+        name="Teachers"
+        parent="student_contract.menu_student_contract_contacts"
+        action="student_contract_teacher_action"
+        sequence="2"/>
+
+    <record id="view_employee_form_inherit" model="ir.ui.view">
+        <field name="name">view.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//group//group//field[@name='company_id']" position="after">
+                <field name="is_teacher" groups="student_contract.group_student_contract_user"/>
+            </xpath>
+            <page name="hr_settings" position="before">
+                <page name="course_lines" string="Course Lines" invisible="not is_teacher">
+                    <field name="course_line_ids"/>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>
