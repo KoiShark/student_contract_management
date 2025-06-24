@@ -32,11 +32,6 @@
         "views/product_template_views.xml",
         "views/student_contract_views.xml",
     ],
-    # "assets": {
-    #     "web.assets_frontend": [
-    #         "l10n_ve_dpt_website_sale/static/src/**/*",
-    #     ],
-    # },
     "license": "LGPL-3",
     "installable": True,
     "auto_install": False,
