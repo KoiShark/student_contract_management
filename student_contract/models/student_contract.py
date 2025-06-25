@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError
 
 class StudentContract(models.Model):
     _name = "student.contract"
+    _inherit = ['mail.thread.main.attachment', 'mail.activity.mixin',]
     _description = "Manage student contracts and relation with student subjects"
 
     name = fields.Char(
